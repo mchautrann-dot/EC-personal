@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joist Marketing Org Chart</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #ffffff;
+    --bg2: #f7f6f3;
+    --bg3: #f1efe8;
+    --border: rgba(0,0,0,0.12);
+    --border2: rgba(0,0,0,0.22);
+    --text1: #1a1a18;
+    --text2: #5f5e5a;
+    --text3: #8c8b85;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1e1e1c;
+      --bg2: #2a2a28;
+      --bg3: #333330;
+      --border: rgba(255,255,255,0.10);
+      --border2: rgba(255,255,255,0.20);
+      --text1: #e8e6de;
+      --text2: #a8a69e;
+      --text3: #6e6c66;
+    }
+    .av-purple{background:#26215C!important;color:#AFA9EC!important}
+    .av-teal{background:#04342C!important;color:#5DCAA5!important}
+    .av-coral{background:#4A1B0C!important;color:#F0997B!important}
+    .av-blue{background:#042C53!important;color:#85B7EB!important}
+    .av-amber{background:#412402!important;color:#EF9F27!important}
+    .av-pink{background:#4B1528!important;color:#ED93B1!important}
+    .av-green{background:#173404!important;color:#97C459!important}
+    .av-gray{background:#2C2C2A!important;color:#B4B2A9!important}
+    .tag-purple{background:#26215C!important;color:#AFA9EC!important}
+    .tag-teal{background:#04342C!important;color:#5DCAA5!important}
+    .tag-coral{background:#4A1B0C!important;color:#F0997B!important}
+    .tag-blue{background:#042C53!important;color:#85B7EB!important}
+    .tag-amber{background:#412402!important;color:#EF9F27!important}
+    .tag-pink{background:#4B1528!important;color:#ED93B1!important}
+    .tag-green{background:#173404!important;color:#97C459!important}
+    .tag-gray{background:#2C2C2A!important;color:#B4B2A9!important}
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg3);
+    color: var(--text1);
+    min-height: 100vh;
+    padding: 32px 20px 48px;
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* header */
+  .header { margin-bottom: 28px; }
+  .header-label { font-size: 11px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--text3); margin-bottom: 5px; }
+  .header-title { font-size: 26px; font-weight: 600; color: var(--text1); }
+  .header-sub { font-size: 14px; color: var(--text2); margin-top: 3px; }
+
+  /* cmo badge */
+  .cmo-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 0; }
+  .cmo-badge {
+    display: inline-flex; align-items: center; gap: 9px;
+    border: 0.5px solid var(--border2);
+    border-radius: 24px;
+    padding: 7px 20px 7px 10px;
+    background: var(--bg2);
+    font-size: 13px; font-weight: 500; color: var(--text2);
+  }
+  .cmo-av {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--bg3); color: var(--text2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 600;
+  }
+  .vl { width: 1px; background: var(--border2); align-self: center; }
+  .vl16 { height: 16px; } .vl20 { height: 20px; } .vl12 { height: 12px; }
+
+  /* three-col layout */
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+
+  /* connector bar from CMO to 3 cols */
+  .connector-bar {
+    display: flex; align-items: flex-start; width: 100%;
+  }
+  .cb-left { flex: 1; border-right: 1px solid var(--border2); height: 12px; }
+  .cb-mid  { flex: 1; height: 12px; }
+  .cb-right { flex: 1; border-left: 1px solid var(--border2); height: 12px; }
+
+  .col-wrap { display: flex; flex-direction: column; align-items: center; }
+
+  .slabel {
+    font-size: 9px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--text3); text-align: center; margin-bottom: 7px;
+  }
+
+  /* cards */
+  .card {
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--bg);
+    padding: 10px 13px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s, box-shadow .15s;
+    position: relative;
+    width: 100%;
+  }
+  .card:hover { border-color: var(--border2); background: var(--bg2); box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+
+  .c-avatar {
+    width: 30px; height: 30px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600; flex-shrink: 0;
+  }
+  .c-head { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+  .c-name { font-size: 13px; font-weight: 600; color: var(--text1); line-height: 1.3; }
+  .c-role { font-size: 11px; color: var(--text2); line-height: 1.4; }
+  .c-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 6px; }
+  .tag { font-size: 9px; font-weight: 600; padding: 2px 7px; border-radius: 20px; line-height: 1.5; }
+  .ei { position: absolute; top: 9px; right: 11px; font-size: 11px; color: var(--text3); }
+
+  /* detail panels */
+  .detail {
+    display: none;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg2);
+    padding: 10px 13px;
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--text2);
+    line-height: 1.65;
+    width: 100%;
+  }
+  .detail.open { display: block; }
+  .detail strong { color: var(--text1); font-weight: 600; }
+  .detail ul { padding-left: 14px; margin-top: 3px; }
+  .detail li { margin-bottom: 2px; }
+
+  /* mini leaf cards */
+  .sub-grid { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; justify-content: center; width: 100%; }
+  .mini {
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg);
+    padding: 7px 10px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+    flex: 1 1 calc(50% - 5px);
+    min-width: 120px;
+  }
+  .mini:hover { border-color: var(--border2); background: var(--bg2); }
+  .mini-name { font-size: 11px; font-weight: 600; color: var(--text1); }
+  .mini-role { font-size: 10px; color: var(--text2); margin-top: 1px; }
+  .mini.hiring { border-style: dashed; opacity: .65; }
+  .mini.hiring .mini-name { color: var(--text3); }
+
+  /* color ramps */
+  .av-purple { background: #EEEDFE; color: #3C3489; }
+  .av-teal   { background: #E1F5EE; color: #0F6E56; }
+  .av-coral  { background: #FAECE7; color: #993C1D; }
+  .av-blue   { background: #E6F1FB; color: #185FA5; }
+  .av-amber  { background: #FAEEDA; color: #854F0B; }
+  .av-pink   { background: #FBEAF0; color: #993556; }
+  .av-green  { background: #EAF3DE; color: #3B6D11; }
+  .av-gray   { background: #F1EFE8; color: #5F5E5A; }
+
+  .tag-purple { background: #EEEDFE; color: #3C3489; }
+  .tag-teal   { background: #E1F5EE; color: #0F6E56; }
+  .tag-coral  { background: #FAECE7; color: #993C1D; }
+  .tag-blue   { background: #E6F1FB; color: #185FA5; }
+  .tag-amber  { background: #FAEEDA; color: #854F0B; }
+  .tag-pink   { background: #FBEAF0; color: #993556; }
+  .tag-green  { background: #EAF3DE; color: #3B6D11; }
+  .tag-gray   { background: #F1EFE8; color: #5F5E5A; }
+
+  .footnote { margin-top: 24px; font-size: 11px; color: var(--text3); text-align: center; }
+
+  @media (max-width: 700px) {
+    .three-col { grid-template-columns: 1fr; }
+    .cb-left, .cb-mid, .cb-right { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-label">Joist Marketing</div>
+    <div class="header-title">Marketing Org Chart</div>
+    <div class="header-sub">Reporting to Patti Newcomer · CMO</div>
+  </div>
+
+  <!-- CMO -->
+  <div class="cmo-wrap">
+    <div class="cmo-badge">
+      <div class="cmo-av">PN</div>
+      Patti Newcomer · CMO
+    </div>
+    <div class="vl vl20"></div>
+    <div class="connector-bar">
+      <div class="cb-left"></div>
+      <div class="cb-mid"></div>
+      <div class="cb-right"></div>
+    </div>
+  </div>
+
+  <!-- 3 columns -->
+  <div class="three-col">
+
+    <!-- ── ANN: Brand & Creative ── -->
+    <div class="col-wrap">
+      <div class="slabel">Brand &amp; Creative</div>
+      <div class="card" onclick="toggle('ann-d','ann-icon')">
+        <span class="ei" id="ann-icon">▸</span>
+        <div class="c-head">
+          <div class="c-avatar av-teal">AB</div>
+          <div>
+            <div class="c-name">Ann Biddlecom</div>
+          </div>
+        </div>
+        <div class="c-role">Head of Brand &amp; Creative</div>
+        <div class="c-tags">
+          <span class="tag tag-teal">Brand</span>
+          <span class="tag tag-teal">Creative</span>
+          <span class="tag tag-teal">Content</span>
+        </div>
+      </div>
+      <div class="detail" id="ann-d">
+        <strong>Centralized marketing agency</strong><br>
+        Brand identity, creative production, web UX, content strategy, traffic management.
+      </div>
+      <div class="vl vl12"></div>
+      <div class="sub-grid">
+        <div class="mini" onclick="toggle('bree-d')">
+          <div class="mini-name">Bree Main</div>
+          <div class="mini-role">Marketing Traffic Manager</div>
+        </div>
+        <div class="detail" id="bree-d">Manages creative workflow &amp; project traffic across the brand team.</div>
+        <div class="mini" onclick="toggle('chris-d')">
+          <div class="mini-name">Chris Clabo</div>
+          <div class="mini-role">Art Director</div>
+        </div>
+        <div class="detail" id="chris-d">Leads visual design &amp; creative direction for campaigns.</div>
+        <div class="mini" onclick="toggle('jill-d')">
+          <div class="mini-name">Jill Slattery</div>
+          <div class="mini-role">Content Lead</div>
+        </div>
+        <div class="detail" id="jill-d">Owns content strategy, copy, and editorial calendar.</div>
+        <div class="mini" onclick="toggle('julie-d')">
+          <div class="mini-name">Julie Carter</div>
+          <div class="mini-role">Web UX Design</div>
+        </div>
+        <div class="detail" id="julie-d">Designs web user experience and interface assets.</div>
+      </div>
+    </div>
+
+    <!-- ── ERIC: Paid Media ── -->
+    <div class="col-wrap">
+      <div class="slabel">Paid Media</div>
+      <div class="card" onclick="toggle('eric-d','eric-icon')">
+        <span class="ei" id="eric-icon">▸</span>
+        <div class="c-head">
+          <div class="c-avatar av-coral">EW</div>
+          <div>
+            <div class="c-name">Eric Wyatt</div>
+          </div>
+        </div>
+        <div class="c-role">Head of Paid Media</div>
+        <div class="c-tags">
+          <span class="tag tag-coral">4 channels</span>
+          <span class="tag tag-coral">Joist</span>
+        </div>
+      </div>
+      <div class="detail" id="eric-d">
+        <strong>Centralized paid media.</strong><br>
+        Manages implementation &amp; execution across 4 paid channels for Joist.
+      </div>
+      <div class="vl vl12"></div>
+      <div class="sub-grid">
+        <div class="mini" onclick="toggle('ava-d')">
+          <div class="mini-name">Angela Vanroon</div>
+          <div class="mini-role">SEO Strategist · Joist Web owner</div>
+        </div>
+        <div class="detail" id="ava-d">SEO strategy &amp; website strategy owner for Joist.</div>
+        <div class="mini" onclick="toggle('gab-d')">
+          <div class="mini-name">Gabriel Hauser</div>
+          <div class="mini-role">Mobile Media Strategist</div>
+        </div>
+        <div class="detail" id="gab-d">Owns paid mobile media strategy and execution.</div>
+        <div class="mini" onclick="toggle('ama-d')">
+          <div class="mini-name">Amanda Dixon</div>
+          <div class="mini-role">Paid Social Strategist</div>
+        </div>
+        <div class="detail" id="ama-d">Manages paid social campaigns across platforms.</div>
+        <div class="mini" onclick="toggle('nic-d')">
+          <div class="mini-name">Nick Shepherd</div>
+          <div class="mini-role">ASO Strategist</div>
+        </div>
+        <div class="detail" id="nic-d">App Store Optimization — improves app discoverability &amp; conversion.</div>
+        <div class="mini" onclick="toggle('brin-d')">
+          <div class="mini-name">Brinda Rathinaswamy</div>
+          <div class="mini-role">Paid Media Strategist</div>
+        </div>
+        <div class="detail" id="brin-d">Executes paid media strategy across assigned channels.</div>
+      </div>
+    </div>
+
+    <!-- ── AMIR: Strategy ── -->
+    <div class="col-wrap">
+      <div class="slabel">Strategy</div>
+      <div class="card" onclick="toggle('amir-d','amir-icon')">
+        <span class="ei" id="amir-icon">▸</span>
+        <div class="c-head">
+          <div class="c-avatar av-purple">AC</div>
+          <div>
+            <div class="c-name">Amir Chaudhry</div>
+          </div>
+        </div>
+        <div class="c-role">Marketing Director · Strategy</div>
+        <div class="c-tags">
+          <span class="tag tag-purple">Lifecycle</span>
+          <span class="tag tag-purple">GTM</span>
+          <span class="tag tag-purple">Acquisition</span>
+        </div>
+      </div>
+      <div class="detail" id="amir-d">
+        <strong>Scope:</strong> Joist + Kickserve (migrated to Joist)<br>
+        <strong>Strategy:</strong> Lifecycle &amp; customer journey<br>
+        <strong>Platform:</strong> Braze (no Looker pipeline)
+      </div>
+      <div class="vl vl12"></div>
+      <div class="slabel" style="margin-top:2px">Direct reports</div>
+
+      <div style="display:flex;flex-direction:column;gap:7px;width:100%">
+
+        <!-- Ahmed -->
+        <div>
+          <div class="card" onclick="toggle('ahmed-d','ahmed-icon')">
+            <span class="ei" id="ahmed-icon">▸</span>
+            <div class="c-head">
+              <div class="c-avatar av-blue">AE</div>
+              <div><div class="c-name">Ahmed (Enned) Elenna</div></div>
+            </div>
+            <div class="c-role">Manager, Customer Marketing · Lifecycle</div>
+            <div class="c-tags">
+              <span class="tag tag-blue">Braze</span>
+              <span class="tag tag-blue">Lifecycle</span>
+            </div>
+          </div>
+          <div class="detail" id="ahmed-d">
+            <strong>Strategy:</strong> Lifecycle — customer journey<br>
+            <strong>Platform:</strong> Braze (no data pipeline to Looker)<br>
+            <strong>Team:</strong>
+            <ul>
+              <li>Angela Bartlett — Marketing Automation Manager</li>
+              <li>Shannon Ketchum — Marketing Manager</li>
+              <li>(Hiring)</li>
+            </ul>
+          </div>
+          <div class="sub-grid" style="margin-top:5px">
+            <div class="mini"><div class="mini-name">Angela Bartlett</div><div class="mini-role">Mktg Automation Mgr</div></div>
+            <div class="mini"><div class="mini-name">Shannon Ketchum</div><div class="mini-role">Marketing Manager</div></div>
+            <div class="mini hiring" style="flex:1 1 100%"><div class="mini-name">Open role</div><div class="mini-role">Hiring</div></div>
+          </div>
+        </div>
+
+        <!-- Khalid -->
+        <div>
+          <div class="card" onclick="toggle('khalid-d','khalid-icon')">
+            <span class="ei" id="khalid-icon">▸</span>
+            <div class="c-head">
+              <div class="c-avatar av-amber">KH</div>
+              <div><div class="c-name">Khalid Hamadeh</div></div>
+            </div>
+            <div class="c-role">Digital Strategist</div>
+            <div class="c-tags">
+              <span class="tag tag-amber">Acquisition</span>
+              <span class="tag tag-amber">Propensity model</span>
+            </div>
+          </div>
+          <div class="detail" id="khalid-d">
+            <strong>Builds:</strong> Customer acquisition forecast model<br>
+            <strong>Manages:</strong> Paid media team — implement &amp; execute strategies<br>
+            <strong>Output:</strong> Channel dashboard (churn, conversion by channel…)<br>
+            <strong>Focus:</strong> Move up the funnel; proxy KPI with higher volume than subscriptions<br>
+            <strong>Method:</strong> Seed profile / propensity model
+          </div>
+        </div>
+
+        <!-- Catherine -->
+        <div>
+          <div class="card" onclick="toggle('cat-d','cat-icon')">
+            <span class="ei" id="cat-icon">▸</span>
+            <div class="c-head">
+              <div class="c-avatar av-pink">CC</div>
+              <div><div class="c-name">Catherine Carrier</div></div>
+            </div>
+            <div class="c-role">Product Marketing</div>
+            <div class="c-tags">
+              <span class="tag tag-pink">GTM</span>
+              <span class="tag tag-pink">Q3 planning</span>
+            </div>
+          </div>
+          <div class="detail" id="cat-d">
+            <strong>Focus:</strong> Q3 planning for GTM features<br>
+            <strong>How:</strong> Setting KPI metrics for feature launches
+          </div>
+        </div>
+
+        <!-- Brian -->
+        <div>
+          <div class="card" onclick="toggle('brian-d','brian-icon')">
+            <span class="ei" id="brian-icon">▸</span>
+            <div class="c-head">
+              <div class="c-avatar av-green">BP</div>
+              <div><div class="c-name">Brian Philip</div></div>
+            </div>
+            <div class="c-role">Payments Product Marketing · Onboarding</div>
+            <div class="c-tags">
+              <span class="tag tag-green">Payments</span>
+              <span class="tag tag-green">Offers</span>
+            </div>
+          </div>
+          <div class="detail" id="brian-d">
+            <strong>Focus:</strong> Payments product marketing<br>
+            <strong>Scope:</strong> Onboarding experience<br>
+            <strong>Additional:</strong> Promotion &amp; offer analysis
+          </div>
+        </div>
+
+      </div><!-- /amir reports -->
+    </div><!-- /amir col -->
+
+  </div><!-- /three-col -->
+
+  <div class="footnote">Click any card to expand details &nbsp;·&nbsp; Dashed border = open headcount &nbsp;·&nbsp; Joist Marketing · 2025</div>
+</div>
+
+<script>
+function toggle(id, iconId) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const isOpen = el.classList.contains('open');
+  el.classList.toggle('open', !isOpen);
+  if (iconId) {
+    const icon = document.getElementById(iconId);
+    if (icon) icon.textContent = isOpen ? '▸' : '▾';
+  }
+}
+</script>
+</body>
+</html>
